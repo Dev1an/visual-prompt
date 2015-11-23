@@ -18,7 +18,7 @@ function prompt(message, title, defaultAnswer, callback) {
 		var stdout  = '',
 			stderr  = ''
 
-		var childProcess = spawn (
+		var childProcess = spawn(
 			"cscript",
 			[join(__dirname, 'inputbox.vbs'), message, title, defaultAnswer]
 		)
@@ -32,7 +32,8 @@ function prompt(message, title, defaultAnswer, callback) {
 		})
 
 		childProcess.on('exit', function(code){
-			console.log("position", stdout.search("\r\n\r\n"))
+			console.log('position', stdout.search("\r\n\r\n"))
+			console.log(stdout.substr(stdout.search("\r\n\r\n")))
 			const result = {
 				'text returned': stdout.substr(stdout.search("\r\n\r\n") + 4, -2)
 			}
