@@ -35,7 +35,9 @@ function prompt(message, title, defaultAnswer, callback) {
 			const result = {
 				'text returned': stdout.substr(stdout.search("\r\n\r\n") + 4, -2)
 			}
-			callback && callback(result, stdout);
+			var error;
+			if (stderr.length > 0) error = stderr
+			callback && callback(error, result);
 		})
 
 	} else {
