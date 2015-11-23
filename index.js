@@ -12,9 +12,7 @@ function prompt(message, title, defaultAnswer, callback) {
 				message: message,
 				defaultAnswer: defaultAnswer
 			},
-			function(error, result) {
-				console.log(error, result)
-			}
+			callback
 		)
 	} else if (platform == 'win32') {
 		var stdout  = '',
@@ -26,15 +24,18 @@ function prompt(message, title, defaultAnswer, callback) {
 		)
 
 		childProcess.stdout.on('data', function(data){
-		  stdout += data.toString();
+			stdout += data.toString();
 		})
 
 		childProcess.stderr.on('data', function(data){
-		  stderr += data.toString();
+			stderr += data.toString();
 		})
 
 		childProcess.on('exit', function(code){
-		  callback && callback(stderr, stdout);
+			const result = {
+				'text returned': stdout.substr(stdout.search("\r\n\r\n") + 4, -2)
+			}
+			callback && callback({textstderr}, stdout);
 		})
 
 	} else {
