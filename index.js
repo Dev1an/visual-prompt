@@ -1,6 +1,7 @@
 const applescript = require('node-osascript')
 const os = require('os');
 const spawn = require('child_process').spawn
+const join = require('path').join
 
 function prompt(message, title, defaultAnswer, callback) {
 	const platform = os.platform()
