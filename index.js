@@ -34,7 +34,7 @@ function prompt(message, title, defaultAnswer, callback) {
 		})
 
 		childProcess.on('exit', function(code){
-		  cb && callback();
+		  callback && callback();
 		})
 
 	} else {
