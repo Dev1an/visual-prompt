@@ -22,7 +22,7 @@ function prompt(message, title, defaultAnswer, callback) {
 
 		var childProcess = spawn (
 			"cscript",
-			[join(__dirname, 'msgbox.vbs'), message, title, defaultAnswer]
+			[join(__dirname, 'inputbox.vbs'), message, title, defaultAnswer]
 		)
 
 		childProcess.stdout.on('data', function(data){
