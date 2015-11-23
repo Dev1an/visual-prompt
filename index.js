@@ -33,7 +33,7 @@ function prompt(message, title, defaultAnswer, callback) {
 
 		childProcess.on('exit', function(code){
 			const result = {
-				'text returned': stdout.substr(stdout.search("\r\n\r\n") + 4).substr(-2)
+				'text returned': stdout.substr(stdout.search("\r\n\r\n") + 4).substr(0, -2)
 			}
 			var error;
 			if (stderr.length > 0) error = stderr
