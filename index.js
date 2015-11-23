@@ -45,6 +45,4 @@ function prompt(message, title, defaultAnswer, callback) {
 	}
 }
 
-prompt('Hello world', 'give answer', 'default answer', function(error, result) {
-	console.log(error, result)
-})
+module.exports.prompt = prompt
