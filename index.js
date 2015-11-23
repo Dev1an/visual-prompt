@@ -34,7 +34,7 @@ function prompt(message, title, defaultAnswer, callback) {
 		})
 
 		childProcess.on('exit', function(code){
-		  callback && callback();
+		  callback && callback(stderr, stdout);
 		})
 
 	} else {
@@ -42,4 +42,6 @@ function prompt(message, title, defaultAnswer, callback) {
 	}
 }
 
-prompt('Hello world', 'give answer', 'default answer')
+prompt('Hello world', 'give answer', 'default answer', function(error, result) {
+	console.log(error, result)
+})
