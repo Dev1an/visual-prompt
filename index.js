@@ -32,10 +32,8 @@ function prompt(message, title, defaultAnswer, callback) {
 		})
 
 		childProcess.on('exit', function(code){
-			console.log('position', stdout.search("\r\n\r\n"))
-			console.log(stdout.substr(stdout.search("\r\n\r\n") + 4))
 			const result = {
-				'text returned': stdout.substr(stdout.search("\r\n\r\n") + 4, -2)
+				'text returned': stdout.substr(stdout.search("\r\n\r\n") + 4).substr(-2)
 			}
 			var error;
 			if (stderr.length > 0) error = stderr
