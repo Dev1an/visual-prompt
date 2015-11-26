@@ -40,11 +40,11 @@ function prompt(message, title, defaultAnswer, callback) {
 			callback && callback(error, result);
 		})
 
-	} else if (os_name == 'linux') {
+	} else if (platform == 'linux') {
 		var stdout  = '', stderr  = ''
 		var childProcess = spawn(
 			"zenity",
-			['--entry', '--title=' + title, '--text=' + message, '--entry-text=' + defaultAnswer]]
+			['--entry', '--title=' + title, '--text=' + message, '--entry-text=' + defaultAnswer]
 		)
 
 		childProcess.stdout.on('data', function(data){
@@ -55,10 +55,9 @@ function prompt(message, title, defaultAnswer, callback) {
 			stderr += data.toString();
 		})
 
-		// TODO: filter stdout
 		childProcess.on('exit', function(code){
 			const result = {
-				'text returned': stdout
+				'text returned': stdout.slice(0, -1)
 			}
 			var error;
 			if (stderr.length > 0) error = stderr
