@@ -40,7 +40,32 @@ function prompt(message, title, defaultAnswer, callback) {
 			callback && callback(error, result);
 		})
 
-	} else {
+	} else if (os_name == 'linux') {
+		var stdout  = '', stderr  = ''
+		var childProcess = spawn(
+			"zenity",
+			['--entry', '--title=' + title, '--text=' + message, '--entry-text=' + defaultAnswer]]
+		)
+
+		childProcess.stdout.on('data', function(data){
+			stdout += data.toString();
+		})
+
+		childProcess.stderr.on('data', function(data){
+			stderr += data.toString();
+		})
+
+		// TODO: filter stdout
+		childProcess.on('exit', function(code){
+			const result = {
+				'text returned': stdout
+			}
+			var error;
+			if (stderr.length > 0) error = stderr
+			callback && callback(error, result);
+		})
+
+    } else {
 		console.error('platform not supported')
 	}
 }
