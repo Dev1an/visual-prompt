@@ -57,10 +57,11 @@ function prompt(message, title, defaultAnswer, callback) {
 
 		childProcess.on('exit', function(code){
 			const result = {
-				'text returned': stdout.slice(0, -1)
+				'text returned': stdout.slice(0, -1),
+				'button returned': 'OK'
 			}
 			var error;
-			if (stderr.length > 0) error = stderr
+			if (stdout.length == 0) error = new Error('The user canceled the operation')
 			callback && callback(error, result);
 		})
 
